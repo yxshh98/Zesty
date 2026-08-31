@@ -1,0 +1,35 @@
+.card-registration {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 35%;
+    justify-content: center;
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px 40px;
+}
+
+.card-title {
+    padding: 50px;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #000;
+    box-shadow: 0 0 4px #000;
+}
+
+.btn-register {
+    background-color: #000;
+    width: 95%;
+    height: 40px;
+    border: none;
+}
+
+.btn-register:hover {
+    background-color: #474647;
+}
+
+.link {
+    text-decoration: none;
+    color: #c64059;
+    margin-left: -15px;
+}
