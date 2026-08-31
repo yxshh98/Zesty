@@ -1,16 +1,57 @@
-# zesty
+# 🍕 Zesty - Food & Grocery Delivery Platform
 
-A new Flutter project.
+Welcome to the official repository for **Zesty**, a modern food ordering and quick grocery delivery service platform (Zesty Mart).
 
-## Getting Started
+This repository is structured as a full-stack project containing both the Flutter mobile application frontend and the Node.js backend API service.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 📁 Repository Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```
+Zesty/
+├── zesty-app/        # 📱 Flutter Mobile Application (iOS, Android, Web)
+└── zesty-backend/    # ⚡ Node.js, Express, MongoDB & Socket.IO API Backend
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 📱 Frontend Mobile App (`zesty-app/`)
+
+Built with **Flutter** for cross-platform support across iOS, Android, and Web.
+
+### Getting Started:
+```bash
+cd zesty-app
+flutter pub get
+flutter run
+```
+
+Refer to [zesty-app/README.md](zesty-app/README.md) for further frontend setup details.
+
+---
+
+## ⚡ Backend API Service (`zesty-backend/`)
+
+Built with **Node.js**, **Express**, **MongoDB**, and **Socket.IO** for real-time order status tracking.
+
+### Key Features:
+- **Authentication**: JWT & Passport with mobile OTP support
+- **Real-Time Tracking**: WebSocket connections via Socket.IO
+- **Payments**: Razorpay & PhonePe Sandbox API integration
+- **Storage**: Media management via Cloudinary & Multer
+
+### Getting Started:
+```bash
+cd zesty-backend
+npm install
+cp .env.example .env
+npm start
+```
+
+Refer to [zesty-backend/README.md](zesty-backend/README.md) for full API endpoint documentation and environment setup.
+
+---
+
+## 📜 License
+This project is licensed under the ISC License.

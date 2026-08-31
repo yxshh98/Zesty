@@ -1,0 +1,173 @@
+const express = require("express");
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
+const Category = require("../models/Category");
+const cloudinary = require("cloudinary").v2;
+const router = express.Router();
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const dir = './images';
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+        cb(null, dir);
+    },
+    filename: (req, file, cb) => {
+        cb(null, "Category" + Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ storage: storage });
+
+router.get("/add-category", (req, res) => {
+    return res.json("hello")
+});
+
+router.get("/get-all-category", async (req, res) => {
+    const category = await Category.find();
+    res.send(category);
+});
+
+router.get("/get-category-image/:id", async (req, res) => {
+    try {
+        const category = await Category.findById(req.params.id).select('image');
+        if (category.image) {
+            res.set('content-type', category.image.contentType)
+            return res.status(200).send(category.image.data)
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(401).send({
+            success: false,
+            message: 'err'
+        })
+    }
+});
+
+// router.post("/add-category", upload.single("image"), async (req, res) => {
+//     const { name } = req.body;
+//     try {
+//         const categoryExist = await Category.findOne({ name: name });
+//         if (categoryExist) {
+//             return res.status(401).json({ success: false, message: "Category already exist." });
+//         }
+
+//         const category = await Category({
+//             name,
+//             image: {
+//                 data: fs.readFileSync(req.file.path),
+//                 contentType: req.file.mimetype
+//             }
+//         });
+
+//         await category.save().then(() => {
+//             return res.status(200).json({ success: true, message: "Category saved." });
+//         }).catch((err) => {
+//             console.log(err);
+//             return res.status(405).json({ success: false, message: "category saving failed " + err });
+//         })
+//     } catch (error) {
+//         console.log(error);
+//     }
+// });
+
+router.post("/add-category", upload.single("image"), async (req, res) => {
+    const { name } = req.body;
+    const img = req.file;
+    try {
+        const categoryExist = await Category.findOne({ name: name });
+        if (categoryExist) {
+            return res.status(401).json({ success: false, message: "Category already exist." });
+        }
+
+        // Configure Cloudinary
+        cloudinary.config({
+            cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+            api_key: process.env.CLOUDINARY_API_KEY,
+            api_secret: process.env.CLOUDINARY_API_SECRET,
+        });
+        //upload to cloudinary
+        const cloudinaryUploadResponse = await cloudinary.uploader.upload(img.path);
+        const imageUrl = cloudinaryUploadResponse.secure_url; // Public URL of the uploaded image
+
+        const category = await Category({
+            name,
+            image: imageUrl
+        });
+
+        await category.save().then(() => {
+            return res.status(200).json({ success: true, message: "Category saved." });
+        }).catch((err) => {
+            console.log(err);
+            return res.status(405).json({ success: false, message: "category saving failed " + err });
+        })
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.delete("/delete-category", async (req, res) => {
+    try {
+        const { id } = req.body;
+        const del = await Category.findByIdAndDelete(id);
+        if (del) {
+            return res.status(200).send({
+                success: true,
+                message: 'category deleted successfully.'
+            })
+        }
+        return res.status(405).json({
+            success: false,
+            message: "err in deleting"
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(401).send({
+            success: true,
+            message: 'err in deleting category.',
+            err
+        })
+    }
+});
+
+router.get("/get/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const category = await Category.findById(id);
+        return res.status(200).send(category);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.post("/update-category", upload.single("image"), async (req, res) => {
+    try {
+        let { id, name } = req.body;
+        const exist = await Category.findById(id);
+        if (exist) {
+            if (name === "") {
+                name = exist.name;
+            }
+
+            // Configure Cloudinary
+            cloudinary.config({
+                cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+                api_key: process.env.CLOUDINARY_API_KEY,
+                api_secret: process.env.CLOUDINARY_API_SECRET,
+            });
+            //upload to cloudinary
+            const cloudinaryUploadResponse = await cloudinary.uploader.upload(req.file.path);
+            const imageUrl = cloudinaryUploadResponse.secure_url; // Public URL of the uploaded image
+            const category = await Category.findByIdAndUpdate(id, { name, image: imageUrl });
+
+            await category.save();
+            return res.status(200).json({ success: true, message: "updated" });
+        }
+    } catch (error) {
+        return res.status(401).json({ success: false, message: "not updated" });
+    }
+});
+
+module.exports = router;
