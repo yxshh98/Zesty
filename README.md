@@ -1,91 +1,185 @@
-# 🍕 Zesty - Food & Grocery Delivery Platform
+# 🍕 Zesty - Food & Quick Commerce Delivery Platform
 
-Welcome to the official repository for **Zesty**, a modern food ordering and quick grocery delivery service platform (Zesty Mart).
+[![Flutter](https://img.shields.io/badge/Flutter-3.6.0-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
+[![NodeJS](https://img.shields.io/badge/Node.js-18.x-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
+[![Express](https://img.shields.io/badge/Express.js-4.x-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com)
+[![React](https://img.shields.io/badge/React-19.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://mongodb.com)
+[![Socket.IO](https://img.shields.io/badge/Socket.IO-4.x-010101?style=for-the-badge&logo=socket.io&logoColor=white)](https://socket.io)
 
-This repository is structured as a full-stack project containing the Flutter mobile application frontend, Node.js backend API service, Restaurant Partner portal, and Admin Management Dashboard.
-
----
-
-## 📁 Repository Structure
-
-```
-Zesty/
-├── zesty-admin/       # 👑 React Admin Management Dashboard & Operations Portal
-├── zesty-app/         # 📱 Flutter Mobile Application (iOS, Android, Web)
-├── zesty-backend/     # ⚡ Node.js, Express, MongoDB & Socket.IO API Backend
-└── zesty-restaurant/  # 🍽️ React Restaurant Owner Dashboard & Portal
-```
+**Zesty** is an enterprise-grade, end-to-end Food Ordering and Quick Commerce (Grocery & Daily Essentials / Zesty Mart) delivery ecosystem. Built as a full-stack monorepo, Zesty provides seamless integration across user mobile ordering, real-time backend API services, restaurant partner management, and executive admin operations.
 
 ---
 
-## 👑 Admin Dashboard (`zesty-admin/`)
+## 🏗️ System Architecture & Sub-Projects
 
-Built with **React.js** for platform administrators to manage restaurants, categories, coupons, Zesty Mart inventory, users, orders, and real-time restaurant partner verifications.
-
-### Key Features:
-- **Restaurant Approvals**: Onboarding and verification workflow for restaurant partners
-- **Zesty Mart Management**: Quick commerce inventory and item management
-- **Categories & Coupons**: Platform-wide category management and promotional coupon management
-- **Analytics & Operations**: System-wide order overview, user management, and real-time notification alerts
-
-### Getting Started:
-```bash
-cd zesty-admin
-npm install
-npm start
+```
+Zesty (Monorepo Root)
+├── 📱 zesty-app/         # Cross-platform Mobile Client (Flutter / Dart)
+├── ⚡ zesty-backend/     # Scalable REST API & WebSockets Engine (Node.js / Express / MongoDB)
+├── 🍽️ zesty-restaurant/  # Restaurant Partner Portal (React 19 / MUI)
+└── 👑 zesty-admin/       # Executive Operations Admin Dashboard (React 19 / Bootstrap)
 ```
 
 ---
 
-## 📱 Frontend Mobile App (`zesty-app/`)
+## 🎯 Key Application Components
 
-Built with **Flutter** for cross-platform support across iOS, Android, and Web.
+### 📱 1. Mobile Application (`zesty-app/`)
+Cross-platform client application for Android and iOS built using **Flutter**.
+- **Food & Grocery Ordering**: Explore nearby restaurants, search dishes, apply dietary filters (Veg/Non-Veg), and order groceries via **Zesty Mart**.
+- **Live GPS Tracking**: Integrates Google Maps SDK with OSRM (Open Source Routing Machine) for interactive route generation, live driver animation, and accurate ETA calculations.
+- **Offline Storage**: Powered by **Hive Local DB** for instant cart retention, saved delivery addresses, and user preferences.
+- **Payment Gateways**: Integrated with **Razorpay**, **PhonePe Sandbox**, and Cash on Delivery (COD) threshold verification.
+- **Animations & UX**: Features **Lottie** micro-animations, custom **Shimmer** loading skeletons, and interactive state dialogs.
 
-### Getting Started:
-```bash
-cd zesty-app
-flutter pub get
-flutter run
-```
+### ⚡ 2. Backend API Engine (`zesty-backend/`)
+Production-grade RESTful API server and WebSocket event orchestrator.
+- **Real-Time WebSockets**: **Socket.IO** rooms (`user_join`, `partner_join`, `admin_join`) powering live order tracking states (`Placed` ➔ `Accepted` ➔ `Preparing` ➔ `Prepared` ➔ `Out for Delivery` ➔ `Delivered`).
+- **Database & Storage**: MongoDB Atlas with Mongoose ORM for high-throughput queries, coupled with **Cloudinary** for image uploads and **Redis** caching.
+- **Authentication & Security**: Passport.js JWT strategies, mobile OTP authentication, and bcrypt password hashing.
+- **Email Notifications**: Integrated **Nodemailer** transaction service for welcome alerts, verification updates, and order invoices.
 
-Refer to [zesty-app/README.md](zesty-app/README.md) for further frontend setup details.
+### 🍽️ 3. Restaurant Partner Portal (`zesty-restaurant/`)
+React-based portal designed for restaurant owners and kitchen management.
+- **Multi-Step Onboarding**: Structured sign-in process including business details, PAN/GST validation, bank account setup, menu creation, and partner contracts.
+- **Live Order Management**: Real-time order pipeline with instant audio alerts and status transitions (`Accept`, `Mark Prepared`, `Assign Delivery`).
+- **Menu & Price Control**: Complete CRUD operations for food categories, items, pricing, availability toggles, and item photos.
+- **Promotions & Ads**: Custom in-app banner campaign management to boost restaurant visibility on customer home feeds.
+
+### 👑 4. Executive Admin Dashboard (`zesty-admin/`)
+Central command operations portal for platform administrators.
+- **Live Partner Verification**: Instant WebSocket notifications when new restaurant partners register, complete with document inspection modals for 1-click approvals/rejections.
+- **Zesty Mart Quick Commerce Management**: Complete catalog control for grocery products, inventory stock monitoring, and category organization.
+- **Coupons & Discount Engine**: Platform-wide promo code creator supporting percentage/flat discounts, minimum purchase rules, and expiration limits.
+- **Analytics & Platform Oversight**: Live orders dashboard, sales revenue reports via Chart.js, user monitoring, and outlet management.
 
 ---
 
-## ⚡ Backend API Service (`zesty-backend/`)
+## 🛠️ Technology Stack Overview
 
-Built with **Node.js**, **Express**, **MongoDB**, and **Socket.IO** for real-time order status tracking.
+| Category | Technology Used |
+| :--- | :--- |
+| **Mobile App (Frontend)** | Flutter 3.x, Dart, Google Maps SDK, Provider, Hive DB, Razorpay SDK, Socket.IO Client |
+| **Backend API Engine** | Node.js, Express.js, MongoDB Atlas (Mongoose), Socket.IO, Redis, Cloudinary, Passport JWT |
+| **Restaurant Web App** | React 19, React Router v7, Material UI (MUI v6), Chart.js, Bootstrap 5, Axios, Toastify |
+| **Admin Operations Web App** | React 19, React Router v7, Bootstrap 5, Chart.js, Socket.IO Client, FontAwesome |
+| **Routing & Geolocation** | Google Maps Geocoding API, OSRM (Open Source Routing Machine) |
 
-### Key Features:
-- **Authentication**: JWT & Passport with mobile OTP support
-- **Real-Time Tracking**: WebSocket connections via Socket.IO
-- **Payments**: Razorpay & PhonePe Sandbox API integration
-- **Storage**: Media management via Cloudinary & Multer
+---
 
-### Getting Started:
+## 🔄 Real-Time Order & Tracking State Machine
+
+```
+[ Customer App ] ──(Place Order)──> [ Backend API ] ──(Socket.IO Alert)──> [ Restaurant Portal ]
+                                          │                                       │
+                                          │                                (Accept & Prepare)
+                                          ▼                                       │
+[ Delivery Tracking Map ] <──(Live GPS Broadcast)── [ Order Active ] <────────────┘
+         │
+         ├── Order Prepared
+         ├── Driver Out for Delivery (OSRM Polyline + ETA)
+         └── Order Delivered (Live Confirmation)
+```
+
+---
+
+## ⚡ Quick Start & Setup Guide
+
+### Prerequisites
+- **Node.js**: v18.x or higher
+- **npm**: v9.x or higher
+- **Flutter SDK**: v3.6.0 or higher
+- **MongoDB Atlas Connection URI**
+- **Google Maps API Key**
+
+---
+
+### 1️⃣ Setting Up the Backend API (`zesty-backend/`)
 ```bash
 cd zesty-backend
 npm install
+
+# Configure environment variables
 cp .env.example .env
-npm start
 ```
 
-Refer to [zesty-backend/README.md](zesty-backend/README.md) for full API endpoint documentation and environment setup.
+Update your `.env` configuration file:
+```env
+PORT=5000
+MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/zesty
+JWT_SECRET=your_jwt_secret_key
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+SUPPORT_EMAIL=support@zesty.com
+```
+
+Start the API development server:
+```bash
+npm start
+```
+The server will boot on `http://localhost:5000`.
 
 ---
 
-## 🍽️ Restaurant Dashboard (`zesty-restaurant/`)
+### 2️⃣ Setting Up the Mobile App (`zesty-app/`)
+```bash
+cd zesty-app
 
-Built with **React.js** for restaurant owners and partners to manage menus, orders, outlet info, and analytics.
+# Install dependencies
+flutter pub get
 
-### Getting Started:
+# Run on Android or iOS emulator
+flutter run
+```
+
+---
+
+### 3️⃣ Setting Up the Restaurant Portal (`zesty-restaurant/`)
 ```bash
 cd zesty-restaurant
+
+# Install web dependencies
 npm install
+
+# Start React development server
 npm start
 ```
+The portal will open at `http://localhost:3000`.
 
 ---
 
-## 📜 License
-This project is licensed under the ISC License.
+### 4️⃣ Setting Up the Admin Portal (`zesty-admin/`)
+```bash
+cd zesty-admin
+
+# Install admin dependencies
+npm install
+
+# Start React admin server
+npm start
+```
+The admin portal will open at `http://localhost:3001`.
+
+---
+
+## 🌐 API Route Endpoints Summary
+
+| Endpoint Group | Base Route | Key Operations |
+| :--- | :--- | :--- |
+| **Authentication** | `/user` | User registration, login, JWT token auth, mobile OTP verification |
+| **Restaurants** | `/restaurant` | Get near restaurants, filter by veg/non-veg, partner application submit |
+| **Menu Items** | `/menu` | Restaurant menu fetch, item additions, category updates |
+| **Orders** | `/order` | Place order, fetch user order history, socket status update |
+| **Payments** | `/payment` | Razorpay order creation, payment signature verification |
+| **Zesty Mart** | `/zesty-mart` | Quick commerce grocery catalog query, stock updates |
+| **Promotions** | `/coupon` | Apply coupon, validate minimum purchase threshold |
+| **Admin Operations**| `/admin` | Partner verification approval/rejection, system stats |
+
+---
+
+## 📜 License & Copyright
+
+Copyright © 2026 **Yash Chhabda**. All rights reserved.  
+Licensed under the [ISC License](LICENSE).
