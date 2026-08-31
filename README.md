@@ -10,8 +10,9 @@ This repository is structured as a full-stack project containing both the Flutte
 
 ```
 Zesty/
-├── zesty-app/        # 📱 Flutter Mobile Application (iOS, Android, Web)
-└── zesty-backend/    # ⚡ Node.js, Express, MongoDB & Socket.IO API Backend
+├── zesty-app/         # 📱 Flutter Mobile Application (iOS, Android, Web)
+├── zesty-backend/     # ⚡ Node.js, Express, MongoDB & Socket.IO API Backend
+└── zesty-restaurant/  # 🍽️ React Restaurant Owner Dashboard & Portal
 ```
 
 ---
@@ -50,6 +51,19 @@ npm start
 ```
 
 Refer to [zesty-backend/README.md](zesty-backend/README.md) for full API endpoint documentation and environment setup.
+
+---
+
+## 🍽️ Restaurant Dashboard (`zesty-restaurant/`)
+
+Built with **React.js** for restaurant owners and partners to manage menus, orders, outlet info, and analytics.
+
+### Getting Started:
+```bash
+cd zesty-restaurant
+npm install
+npm start
+```
 
 ---
 

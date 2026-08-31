@@ -1,0 +1,81 @@
+.navbar {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    height: 75px;
+}
+
+.img-logo {
+    width: 150px;
+    height: 150px;
+    margin-top: -50px;
+}
+
+/* .Mui-active {
+    color: #000;
+} */
+
+.MuiStepIcon-root {
+    /* background-color: #000;
+    border-radius: 50%; */
+    color: #000;
+}
+
+.MuiStepIcon-active {
+    background-color: #000;
+    color: #000;
+}
+
+/* STEP 1 */
+
+.form-card {
+    width: 80%;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.form-floating>label {
+    color: #5f6962 !important;
+}
+
+.form-check-input:checked {
+    background-color: #000;
+}
+
+.form-check-label {
+    color: #5f6962;
+}
+
+.form-control::placeholder {
+    color: #5f6962;
+    opacity: 1;
+}
+
+.btn-continue {
+    background-color: #000;
+    height: 50px;
+    color: #fff;
+    width: 50%;
+    margin-left: 5%;
+}
+
+.btn-continue:hover {
+    background-color: #222;
+}
+
+.btn-continue:focus {
+    background-color: #222;
+}
+
+.btn-continue:active {
+    background-color: #222;
+}
+
+@media only screen and (max-width: 600px) {
+    .form-card {
+        width: 100%;
+    }
+
+    .form-h4 {
+        margin-top: 30px;
+        width: 100% !important;
+    }
+}

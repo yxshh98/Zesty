@@ -1,0 +1,132 @@
+header {
+    height: 80px;
+    width: 102%;
+    display: flex;
+    background-color: #fff;
+    margin: 0;
+    padding: 0%;
+}
+
+.logo {
+    padding-top: 0px;
+    color: #000;
+    font-weight: 600;
+}
+
+.sidebar-toggle {
+    width: 100px;
+    background-color: transparent;
+}
+
+.fa-bars {
+    font-size: 25px;
+    color: var(--clr-black);
+}
+
+
+.user-info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 16px;
+}
+
+.info-name {
+    /* margin-top: px; */
+    font-weight: 500;
+    font-size: 19px;
+    text-transform: uppercase;
+    color: var(--clr-primary-light);
+}
+
+.info-img {
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    border-radius: 100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.nav-item {
+    margin-bottom: 10px;
+    /* margin-right: 4px; */
+}
+
+.nav-link {
+    display: block;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 14px;
+    column-gap: 12px;
+    letter-spacing: 0.03em;
+    border: 1px solid transparent;
+    transition: var(--transition-default);
+}
+
+.nav-link:hover {
+    /* border: 1px solid #473b33; */
+    /* background-color: #473b33; */
+    background-color: #edf5f3;
+    /* color: var(--clr-white); */
+    border-left: 8px solid #024b3b;
+    border-radius: 0;
+    color: #013a2e;
+}
+
+.nav-link.active {
+    /* background-color: var(--clr-pumpkin); */
+    background-color: #edf5f3;
+    border-left: 8px solid #024b3b;
+    color: #013a2e;
+    border-radius: 0;
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px; */
+}
+
+.nav-link-icon {
+    width: 22px;
+}
+
+.nav-link-text {
+    text-transform: capitalize;
+}
+
+.fa-solid {
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    header {
+        display: flex;
+        width: 100%;
+    }
+
+    .fa-bars {
+        display: flex;
+        font-size: 30px;
+        color: var(--clr-black);
+    }
+
+    .img-logo {
+        width: 20px;
+        margin-left: 20px;
+    }
+
+    .nav-brand {
+        display: flex;
+        margin-top: -60px !important;
+        justify-content: center;
+        font-size: large !important;
+    }
+
+    .info-name {
+        /* margin-top: px; */
+        /* font-weight: 500;
+        font-size: medium !important;
+        text-transform: uppercase;
+        color: var(--clr-primary-light); */
+        display: none !important;
+    }
+}
