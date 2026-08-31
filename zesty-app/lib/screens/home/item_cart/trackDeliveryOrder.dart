@@ -208,7 +208,6 @@ class _TrackDeliveryOrderState extends State<TrackDeliveryOrder>{
 
   // Start source marker movement along the route
   void _startSourceMarkerMovement() {
-    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("tushar")));
     _sourceMarkerMovementTimer?.cancel(); // Cancel any existing timer
 
     _sourceMarkerMovementTimer = Timer.periodic(Duration(milliseconds: 500), (timer) {
